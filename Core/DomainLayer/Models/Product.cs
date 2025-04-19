@@ -10,7 +10,7 @@ namespace DomainLayer.Models
     {
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
-        public string ProductUrl { get; set; } = null!;
+        public string PictureUrl { get; set; } = null!;
         public int Price { get; set; }
         public ProductBrand ProductBrand { get; set; }
         public int BrandId { get; set; } //FK
