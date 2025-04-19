@@ -24,7 +24,7 @@ namespace E_Commerce.Web
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddScoped<IDataSeeding,DataSeeding>();
-            
+            builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 
             #endregion
 
