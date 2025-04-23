@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace Services.Specifications
 {
-    internal class ProductWithBrandAndTypeSpecification :BaseSpecifications<Product ,int>
+    internal class ProductWithBrandAndTypeSpecification : BaseSpecifications<Product, int>
     {
         // Get All Products With Types And Brands
         public ProductWithBrandAndTypeSpecification(ProductQueryParams queryParams)
-            :base(P=>(!queryParams.BrandId.HasValue || P.BrandId == queryParams.BrandId) 
-            && (!queryParams.TypeId.HasValue || P.TypeId==queryParams.TypeId))
+            : base(P => (!queryParams.BrandId.HasValue || P.BrandId == queryParams.BrandId)
+            && (!queryParams.TypeId.HasValue || P.TypeId == queryParams.TypeId)
+            && (string.IsNullOrWhiteSpace(queryParams.SearchValue) || P.Name.ToLower().Contains(queryParams.SearchValue.ToLower())))
         {
             AddInclude(P => P.ProductBrand);
             AddInclude(P => P.ProductType);
