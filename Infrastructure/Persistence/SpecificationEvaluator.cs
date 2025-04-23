@@ -17,6 +17,13 @@ namespace Persistence
             var query = InputQuery;
             if (specifications.Criteria != null)
                 query = query.Where(specifications.Criteria);
+
+            if(specifications.OrderBy != null)
+                query = query.OrderBy(specifications.OrderBy);
+
+            if(specifications.OrderByDescending != null)
+                query = query.OrderByDescending(specifications.OrderByDescending);
+
             if (specifications.IncludeExpressions != null && specifications.IncludeExpressions.Count > 0)
             {
                 // foreach(var exp in specifications.IncludeExpressions)               
