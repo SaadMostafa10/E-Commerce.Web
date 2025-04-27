@@ -18,9 +18,9 @@ namespace Persistence
         {
             try
             {
-                var PendingMirations = await _dbContext.Database.GetAppliedMigrationsAsync();
+                var PendingMirations = await _dbContext.Database.GetPendingMigrationsAsync();
                 // Production
-                if ((PendingMirations).Any())
+                if (PendingMirations.Any())
                 {
                    await _dbContext.Database.MigrateAsync();
                 }
@@ -42,7 +42,9 @@ namespace Persistence
                     var ProductTypes = await JsonSerializer.DeserializeAsync<List<ProductType>>(ProductTypeData);
                     if (ProductTypes is not null && ProductTypes.Any())
                        await _dbContext.ProductTypes.AddRangeAsync(ProductTypes);
+
                 }
+                await _dbContext.SaveChangesAsync();
                 if (!_dbContext.Set<Product>().Any())
                 { 
                     var ProductData = File.OpenRead(@"..\Infrastructure\Persistence\Data\DataSeed\products.json");

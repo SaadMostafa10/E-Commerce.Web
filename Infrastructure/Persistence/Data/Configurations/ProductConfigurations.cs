@@ -17,7 +17,7 @@ namespace Persistence.Data.Configurations
                    .WithMany()
                    .HasForeignKey(P => P.BrandId);
 
-            builder.HasOne(P => P.ProductBrand)
+            builder.HasOne(P => P.ProductType)
                    .WithMany()
                    .HasForeignKey(P => P.TypeId);
 
