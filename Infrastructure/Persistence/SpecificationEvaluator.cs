@@ -33,6 +33,11 @@ namespace Persistence
                 query = specifications.IncludeExpressions.Aggregate(query, (CurrentQuery, IncludeExp) => CurrentQuery.Include(IncludeExp));
 
             }
+
+            if (specifications.IsPaginated)
+            {
+                query = query.Skip(specifications.Skip).Take(specifications.Take);
+            }
             return query;
         }   
     }
