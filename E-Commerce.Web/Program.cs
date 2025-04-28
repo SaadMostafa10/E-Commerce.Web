@@ -1,5 +1,6 @@
 
 using DomainLayer.Contracts;
+using E_Commerce.Web.CustomMiddleWares;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Persistence.Data;
@@ -43,6 +44,16 @@ namespace E_Commerce.Web
 
             #endregion
             #region Configure the HTTP request pipeline.
+
+            // app.Use(async (RequestContext, NextMiddleWare) =>
+            // {
+            //     Console.WriteLine("Request Under Proccessing");
+            //     await NextMiddleWare.Invoke();
+            //     Console.WriteLine("Waiting Response");
+            //     Console.WriteLine(RequestContext.Response.Body);
+            // });
+            app.UseMiddleware<CustomExceptionHandlerMiddleWare>();
+
 
             if (app.Environment.IsDevelopment())
             {
